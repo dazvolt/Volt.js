@@ -76,13 +76,14 @@ $.widget('custom.volt', {
             /**
              * Callback for element when fully lighted
              **/
-            callback: function () {
-            }
+            callback: function () {}
         }
     },
 
     _init: function () {
-        if (this.options.neon_flicker.enable) this._handle_neon_flicker();
+        if (this.options.neon_flicker.enable) {
+            this._handle_neon_flicker();
+        }
     },
 
     _handle_neon_flicker: function () {
@@ -95,16 +96,13 @@ $.widget('custom.volt', {
     },
 
     _neon_flicker_css: function () {
-        var background,
-            color = this._hex_to_rgb(this.options.neon_flicker.custom_color.glow.color),
+        var color = this._hex_to_rgb(this.options.neon_flicker.custom_color.glow.color),
             blur = this.options.neon_flicker.custom_color.glow.blur,
             opacity = this.options.neon_flicker.opacity;
-
-        if (this.options.neon_flicker.custom_color.enable) {
-            background = this.options.neon_flicker.custom_color.background;
-        } else {
-            background = $(this.element).css('background');
-        }
+            
+        var background = this.options.neon_flicker.custom_color.enable 
+            ? this.options.neon_flicker.custom_color.background 
+            : $(this.element).css('background');
 
         $(this.element).css({
             'box-shadow': '0 0px ' + blur + 'px rgb(' + color + ')',
@@ -128,8 +126,8 @@ $.widget('custom.volt', {
             max = max - (count * 10 * self.options.neon_flicker.interval.step);
             min = min - (count * self.options.neon_flicker.interval.step);
 
-            if (min <= 10) min = 10;
-            if (max <= 50) max = 50;
+            if (min <= 10) {min = 10;}
+            if (max <= 50) {max = 50;}
 
             interval = Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -138,11 +136,9 @@ $.widget('custom.volt', {
             }
 
             if (typeof css.glow.color !== 'string') {
-                if (css.background.indexOf('#') > -1) {
-                    css.glow.color = 'rgb(' + self._hex_to_rgb(css.background) + ')';
-                } else {
-                    css.glow.color = css.background;
-                }
+                css.glow.color = css.background.indexOf('#') > -1 
+                    ? 'rgb(' + self._hex_to_rgb(css.background) + ')' 
+                    : css.background;
             }
 
             $this.css({
@@ -178,15 +174,11 @@ $.widget('custom.volt', {
                 'opacity': self.options.neon_flicker.opacity
             });
 
-            setTimeout(function () {
-                flicker_up();
-            }, interval);
+            setTimeout(flicker_up, interval);
         }
 
         if (this.options.neon_flicker.delay > 0) {
-            setTimeout(function () {
-                flicker_up();
-            }, this.options.neon_flicker.delay);
+            setTimeout(flicker_up, this.options.neon_flicker.delay);
         } else {
             flicker_up();
         }
