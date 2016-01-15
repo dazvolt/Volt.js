@@ -85,10 +85,6 @@ $.widget('custom.volt', {
         if (this.options.neon_flicker.enable) this._handle_neon_flicker();
     },
 
-    _create_neon_flicker: function () {
-        if (this.options.neon_flicker.custom_color.enable) this._handle_neon_flicker();
-    },
-
     _handle_neon_flicker: function () {
         var min = this.options.neon_flicker.interval.min,
             max = this.options.neon_flicker.interval.max,
@@ -125,11 +121,10 @@ $.widget('custom.volt', {
 
     _neon_flicker: function (min, max, count, css) {
         var $this = $(this.element),
-            self = this;
+            self = this,
+            interval = 0;
 
         function flicker_up() {
-            var interval = 0;
-
             max = max - (count * 10 * self.options.neon_flicker.interval.step);
             min = min - (count * self.options.neon_flicker.interval.step);
 
@@ -149,18 +144,20 @@ $.widget('custom.volt', {
                     css.glow.color = css.background;
                 }
             }
+
+            $this.css({
+                'opacity': 1
+            });
+
             if (self.options.neon_flicker.type === 'block') {
                 $this.css({
-                    'opacity': 1,
                     'box-shadow': '0 0 ' + css.glow.blur + ' ' + css.glow.color
                 });
             } else if (self.options.neon_flicker.type === 'text') {
                 $this.css({
-                    'opacity': 1,
                     'text-shadow': '0 0 ' + css.glow.blur + ' ' + css.glow.color
                 });
             }
-
 
             setTimeout(function () {
                 count--;
@@ -175,7 +172,7 @@ $.widget('custom.volt', {
         }
 
         function flicker_down() {
-            var interval = Math.floor(Math.random() * (max - min + 1)) + min;
+            interval = Math.floor(Math.random() * (max - min + 1)) + min;
 
             $this.css({
                 'opacity': self.options.neon_flicker.opacity
@@ -193,7 +190,6 @@ $.widget('custom.volt', {
         } else {
             flicker_up();
         }
-
     },
 
     _hex_to_rgb: function (hex) {
