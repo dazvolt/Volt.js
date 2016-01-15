@@ -24,7 +24,7 @@ Could be either 'text' or 'block', you can set any block to glow or do it only f
 How much time do you want to wait until Neon Flicker will light up. If set to 0 - no timeout applied.
 
 ### neon_flicker.interval
-Interval is high importance option which allows you to tweak how fast neon will flick and how many times.
+Interval is high importance set of options which allows you to tweak how fast neon will flick and how many times.
 Contains some options:
 ##### neon_flicker.interval.min {Number} (ms)
 ###### Default: 50
