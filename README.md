@@ -1,5 +1,5 @@
 # Volt.js
-Volt.js is a jQuery &amp; jQuery UI based collection of scripts which allows to work with light system
+Volt.js is a jQuery &amp; jQuery UI based collection of scripts delivered as jQuery UI widget, which allows to create different light effects.
 
 Currently is in active development.
 
