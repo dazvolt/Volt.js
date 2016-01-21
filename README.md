@@ -113,3 +113,7 @@ Triggered when Neon object is turned off
 ###### Default: 'toggled_on.neon_flicker'
 
 Triggered when Neon object is turned on. Keep in mind that event fires up exactly at the second Neon object is starts flickering and not after flickering is done.
+
+### destroy.volt
+
+Triggered just before widget is destroyed by method destroy()
