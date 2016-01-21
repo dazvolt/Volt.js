@@ -117,9 +117,10 @@ $.widget('custom.volt', {
     _neon_flicker_css: function () {
         var color = this._hex_to_rgb(this.options.neon_flicker.custom_color.glow.color),
             blur = this.options.neon_flicker.custom_color.glow.blur,
-            opacity = this.options.neon_flicker.opacity;
+            opacity = this.options.neon_flicker.opacity,
+            background;
             
-        var background = this.options.neon_flicker.custom_color.enable 
+        background = this.options.neon_flicker.custom_color.enable
             ? this.options.neon_flicker.custom_color.background 
             : $(this.element).css('background');
 
