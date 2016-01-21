@@ -74,6 +74,10 @@ $.widget('custom.volt', {
              **/
             opacity: 0,
             /**
+             * Custom event namespace option
+             **/
+            event_namespace: 'neon_flicker',
+            /**
              * Callback for element when fully lighted
              **/
             callback: function () {
@@ -81,10 +85,20 @@ $.widget('custom.volt', {
         }
     },
 
+    /**
+     * Main init of widget
+     *
+     * @private
+     */
     _init: function () {
         if (this.options.neon_flicker.enable) this._handle_neon_flicker();
     },
 
+    /**
+     * Observes settings for NeonFlicker and process CSS
+     *
+     * @private
+     */
     _handle_neon_flicker: function () {
         var min = this.options.neon_flicker.interval.min,
             max = this.options.neon_flicker.interval.max,
@@ -94,6 +108,11 @@ $.widget('custom.volt', {
         this._neon_flicker(min, max, count, this.options.neon_flicker.custom_color);
     },
 
+    /**
+     * Creates styles for NeonFlicker object
+     *
+     * @private
+     */
     _neon_flicker_css: function () {
         var background,
             color = this._hex_to_rgb(this.options.neon_flicker.custom_color.glow.color),
@@ -119,11 +138,26 @@ $.widget('custom.volt', {
 
     },
 
+    /**
+     * Main handler for NeonFlicker
+     *
+     * @param {Number} min
+     * @param {Number} max
+     * @param {Number} count
+     * @param {Object} css
+     * @private
+     */
     _neon_flicker: function (min, max, count, css) {
         var $this = $(this.element),
             self = this,
             interval = 0;
 
+        /**
+         * Lights up Neon object
+         * Both up() and donw() creates animation for NeonFlicker
+         *
+         * @private
+         */
         function flicker_up() {
             max = max - (count * 10 * self.options.neon_flicker.interval.step);
             min = min - (count * self.options.neon_flicker.interval.step);
@@ -171,6 +205,11 @@ $.widget('custom.volt', {
             }, interval);
         }
 
+        /**
+         * Turns off Neon object
+         *
+         * @private
+         */
         function flicker_down() {
             interval = Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -192,7 +231,44 @@ $.widget('custom.volt', {
         }
     },
 
+    /**
+     * Transforms hex string to rgb string
+     *
+     * @param {String} hex
+     * @private
+     */
     _hex_to_rgb: function (hex) {
         return ['0x' + hex[1] + hex[2] | 0, '0x' + hex[3] + hex[4] | 0, '0x' + hex[5] + hex[6] | 0];
+    },
+
+    /**
+     * Toggles light on Neon object
+     *
+     * @public
+     */
+    neon_toggle: function () {
+        //erase callback because of options compatibility problems
+        //in case you want to use callback - catch events for toggle_on and _off
+        this.options.neon_flicker.callback = function () {};
+
+        if ( parseInt(this.element.css('opacity')) === 1 ) {
+            this.element.trigger('toggled_off.' + this.options.neon_flicker.event_namespace);
+            this.element.css({
+                'opacity': this.options.neon_flicker.opacity
+            });
+        } else {
+            this.element.trigger('toggled_on.' + this.options.neon_flicker.event_namespace);
+            this._handle_neon_flicker();
+        }
+    },
+
+    /**
+     * Destroys volt.js instance and assigned objects
+     *
+     * @public
+     */
+    destroy : function () {
+        this.element.remove();
+        $.Widget.prototype.destroy.call(this);
     }
 });
