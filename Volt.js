@@ -256,12 +256,14 @@ $.widget('custom.volt', {
     },
 
     /**
-     * Destroys volt.js instance and assigned objects
+     * Destroys volt.js instance and/or assigned objects
      *
+     * @param {Boolean} type
      * @public
      */
-    destroy : function () {
-        this.element.remove();
+    destroy: function (type) {
         $.Widget.prototype.destroy.call(this);
+
+        if (type) this.element.remove();
     }
 });
