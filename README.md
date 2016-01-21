@@ -96,9 +96,12 @@ Callback for element when animation sequence is finished
 
 Allows you to toggle Neon object off or on. Erases callback in options. You can use events for toggle in order to set callback.
 
-### destroy
+### destroy(type)
+###### @param {Boolean} type
 
-Destroys volt.js widget instance and current element assigned to it
+Destroys widget and/or element depending of passed param.
+If passed type set to true, widget will be destroyed completely (widget instance and element which is widget assigned to).
+If passed type set to false, widget will only destroy itself instance and will not destroy assigned element.
 
 ## List of events
 ### toggled_off.event_namespace
