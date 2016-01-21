@@ -262,6 +262,7 @@ $.widget('custom.volt', {
      * @public
      */
     destroy: function (type) {
+        this.element.trigger('destroy.volt');
         $.Widget.prototype.destroy.call(this);
 
         if (type) this.element.remove();
