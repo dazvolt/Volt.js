@@ -81,7 +81,28 @@ Blur can also be set to {Boolean} "true" which will do automatic (30% size of ob
 
 Opacity of element which should be when light is "turned off"
 
+### neon_flicker.event_namespace {String}
+###### Default: 'neon_flicker'
+
+You can set custom namespace for NeonFlicker events
+
 ### neon_flicker.callback {Function}
 ###### Default: function () {}
 
 Callback for element when animation sequence is finished
+
+## List of methods
+### neon_toggle
+
+Allows you to toggle Neon object off or on. Erases callback in options. You can use events for toggle in order to set callback.
+
+## List of events
+### toggled_off.event_namespace
+###### Default: 'toggled_off.neon_flicker'
+
+Triggered when Neon object is turned off
+
+### toggled_on.event_namespace
+###### Default: 'toggled_on.neon_flicker'
+
+Triggered when Neon object is turned on. Keep in mind that event fires up exactly at the second Neon object is starts flickering and not after flickering is done.
