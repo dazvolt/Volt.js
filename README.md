@@ -96,6 +96,10 @@ Callback for element when animation sequence is finished
 
 Allows you to toggle Neon object off or on. Erases callback in options. You can use events for toggle in order to set callback.
 
+### destroy
+
+Destroys volt.js widget instance and current element assigned to it
+
 ## List of events
 ### toggled_off.event_namespace
 ###### Default: 'toggled_off.neon_flicker'
