@@ -1,7 +1,7 @@
 # Volt.js
 Volt.js is a jQuery &amp; jQuery UI based collection of scripts delivered as jQuery UI widget, which allows to create different light effects.
 
-Currently is in active development.
+Currently is development. I'm doing this in my free time.
 
 # Feature: Neon Flicker
 Neon flicker allows to imitate well-known neon light effect when it's turned on.
